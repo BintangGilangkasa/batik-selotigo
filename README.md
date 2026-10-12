@@ -1,109 +1,105 @@
-````markdown
-# React + Tailwind + Vite (Lite Template)
+# Batik Selotigo
 
-This project was created using **Create Lite**! It provides a minimal, ultra-fast setup to get **React** working in **Vite** with **Tailwind CSS**, **HMR**, and essential linting pre-configured.
+Website profil dan katalog digital untuk Batik Selotigo, usaha batik lokal dari Salatiga. Website ini dibuat dengan React, Vite, dan Tailwind CSS untuk memperkenalkan cerita usaha, menampilkan kategori dan pilihan produk, serta memudahkan pengunjung menghubungi Batik Selotigo.
 
----
+## Fitur
 
-## 🚀 Features
+- Halaman beranda, cerita Batik Selotigo, pilihan produk, kontak, dan footer.
+- Katalog produk dalam kategori Batik, Pakaian, Aksesori, dan Workshop.
+- Filter kategori: pilih kartu kategori untuk melihat produk yang terkait.
+- Dialog katalog berisi daftar produk dan tautan pertanyaan melalui WhatsApp.
+- Bahasa Indonesia dan Inggris.
+- Mode terang dan gelap; pilihan bahasa dan tema disimpan di browser.
+- Layout responsif untuk ponsel, tablet, dan desktop.
 
-- ⚛️ **React + Vite**: Modern, lightweight, and fast development experience.
-- 🎨 **Tailwind CSS**: Preconfigured for instant utility-first styling.
-- 🔥 **Hot Module Replacement (HMR)**: Instant updates as you code.
-- 🧹 **ESLint Support**: Basic rules included for cleaner code.
-- ⚙️ **Custom Server Port**: Default port set to `3000`.
-- 🧠 **Simple & Fast**: Designed to be beginner-friendly and incredibly quick to load.
+Konten dan produk disimpan secara statis di aplikasi. Website tidak memerlukan backend atau database.
 
----
+## Teknologi
 
-## 🧩 Getting Started
+- React 19
+- Vite 7
+- Tailwind CSS 4 melalui plugin Vite
+- JavaScript (ES modules)
 
-### 1️⃣ Install Dependencies
+## Persiapan
 
-Navigate into your project folder and install the necessary dependencies:
-
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-````
-
-### 2️⃣ Start the Development Server
-
-Run the development command to launch your app:
+Pasang [Node.js](https://nodejs.org/) versi yang didukung Vite 7 (Node.js 20.19+ atau 22.12+ disarankan) dan npm. Periksa instalasi:
 
 ```bash
-npm run dev
+node --version
+npm --version
 ```
 
-Now visit 👉 **http://localhost:3000**
+## Menjalankan secara lokal
 
------
+1. Clone repositori, lalu masuk ke folder proyek:
 
-## 🛠️ Scripts
+   ```bash
+   git clone <URL_REPOSITORI>
+   cd <FOLDER_PROYEK>
+   ```
 
-| Command | Description |
-| :--- | :--- |
-| `npm run dev` | Starts the local development server with HMR. |
-| `npm run build` | Builds the application for production into the `dist` folder. |
-| `npm run preview` | Serves the production build locally for testing before deployment. |
+2. Pasang dependensi:
 
------
+   ```bash
+   npm install
+   ```
 
-## ⚙️ Configuration
+3. Jalankan server pengembangan:
 
-### Vite Configuration (`vite.config.js`)
+   ```bash
+   npm run dev
+   ```
 
-You can modify the server settings, including the port, in this file:
+   Vite membuka browser secara otomatis. Alamat lokal yang dikonfigurasi adalah `http://localhost:6969`.
 
-```javascript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+## Perintah yang tersedia
 
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  server: {
-    port: 3000,   // Change this port if needed
-    open: true,   // Automatically open browser on start
-  },
-})
+| Perintah | Kegunaan |
+| --- | --- |
+| `npm run dev` | Menjalankan server pengembangan Vite pada port 6969. |
+| `npm run build` | Membuat build produksi ke folder `dist/`. |
+| `npm run preview` | Menjalankan preview lokal dari hasil build. Jalankan `npm run build` terlebih dahulu. |
+| `npm run lint` | Memeriksa kode dengan ESLint. |
+
+## Struktur proyek
+
+```text
+public/
+└── images/                   # Foto dan aset gambar yang disajikan langsung
+src/
+├── App.jsx                   # Komponen root aplikasi
+├── main.jsx                  # Entry React dan stylesheet
+├── index.css                 # Tailwind, token warna/tema, font, dan global styles
+├── pages/
+│   └── HomePage.jsx          # Merangkai section dan mengatur dialog katalog
+├── sections/
+│   ├── HeroSection.jsx
+│   ├── IntroStrip.jsx
+│   ├── StorySection.jsx
+│   ├── CollectionSection.jsx
+│   ├── QuoteSection.jsx
+│   └── ContactSection.jsx
+├── components/
+│   ├── catalog/              # Kartu produk dan dialog katalog
+│   ├── common/               # Komponen kecil yang digunakan ulang
+│   └── layout/               # Navbar dan footer
+├── data/
+│   └── siteContent.jsx       # Teks bilingual dan data kategori/produk
+├── hooks/
+│   └── useSitePreferences.js # Preferensi bahasa dan tema
+└── utils/
+    └── whatsapp.js           # Pembentukan tautan WhatsApp
 ```
 
-### Tailwind Setup
+## Mengubah konten
 
-Tailwind CSS is already integrated via the official `@tailwindcss/vite` plugin and imported in `src/index.css`. You can start using utility classes immediately\!
+- **Nama produk, deskripsi, kategori, dan teks halaman:** edit `src/data/siteContent.jsx`. Perbarui bagian `id` dan `en` agar kedua bahasa tetap konsisten. Setiap kategori memiliki `title`, `description`, `details`, `products`, `image`, dan `alt`.
+- **Foto:** simpan aset di `public/images/`, lalu gunakan path seperti `/images/nama-file.jpg` pada data kategori. Pastikan nama file dan path cocok.
+- **Susunan serta interaksi section koleksi:** edit `src/sections/CollectionSection.jsx`.
+- **Tampilan kartu produk:** edit `src/components/catalog/ProductCard.jsx`.
+- **Isi dialog katalog:** edit `src/components/catalog/ProductCatalogDialog.jsx`.
+- **Nomor WhatsApp:** edit `src/utils/whatsapp.js`.
+- **Layout halaman:** edit file section di `src/sections/`; `src/pages/HomePage.jsx` mengatur urutannya.
 
-To customize your design system, modify the `tailwind.config.js` file:
-
-```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-```
-
------
-
-## 🧠 Notes
-
-  * **Customizing the Port:** To change the development port, update the `server.port` value in `vite.config.js`.
-  * **React Compiler:** For experimental features like the React Compiler, you will need to install the necessary Babel/Vite plugin and update your `vite.config.js`. Consult the official [React Compiler Docs](https://react.dev/learn/react-compiler) for the latest setup instructions.
-
------
-
-## 📄 License
-
-MIT © 2025 — Created with ❤️ using **Create Lite**
-
-```
-```
+Gaya antarmuka menggunakan utility class Tailwind pada komponen. Variabel warna dan tema global berada di `src/index.css`.
